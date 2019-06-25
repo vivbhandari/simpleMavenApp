@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("resource")
 public class Resource {
+	ObjectMapper mapper = new ObjectMapper();
+
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("testGet")
@@ -29,7 +31,6 @@ public class Resource {
 	@Path("testPost")
 	public Response testPost(String input)
 			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
 		TestData testData = mapper.readValue(input, TestData.class);
 		System.out.println(testData);
 		return Response.status(201).entity("success: " + testData + "\n")
